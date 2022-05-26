@@ -1,16 +1,16 @@
 // use native apply
 function apply(func, context, argsArray) {
-  func.apply(context, argsArray)
+  func.apply(context, argsArray);
 }
 
 // use native call
 function apply(func, context, argsArray = []) {
-  func.call(context, ...argsArray)
+  func.call(context, ...argsArray);
 }
 
 // use native bind
 function apply(func, context, argsArray = []) {
-  func.bind(context, ...argsArray)()
+  func.bind(context, ...argsArray)();
 }
 
 // create new context
