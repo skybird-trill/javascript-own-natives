@@ -7,7 +7,7 @@ Function.prototype.myBind = function(context, ...args) {
 Function.prototype.myBind = function(context, ...args) {
   const boundFunction = this;
   return function (...bindArgs) {
-    boundFunction.apply(context, args.concat(bindArgs));
+    boundFunction.apply(context, [...args, ...bindArgs]);
   };
 };
 
@@ -15,7 +15,7 @@ Function.prototype.myBind = function(context, ...args) {
 Function.prototype.myBind = function(context, ...args) {
   const boundFunction = this;
   return function (...bindArgs) {
-    boundFunction.call(context, ...args.concat(bindArgs));
+    boundFunction.call(context, ...[...args, ...bindArgs]);
   };
 };
 
@@ -28,7 +28,7 @@ Function.prototype.myBind = function(context, ...args) {
       ...context,
       [uniqFieldName]: boundFunction,
     };
-    boundContext[uniqFieldName](...args.concat(bindArgs));
+    boundContext[uniqFieldName](...[...args, ...bindArgs]);
   };
 };
 
@@ -38,7 +38,7 @@ Function.prototype.myBind = function(context, ...args) {
   return function (...bindArgs) {
     const uniqFieldName = Symbol("bindFunction");
     context[uniqFieldName] = boundFunction;
-    context[uniqFieldName](...args.concat(bindArgs));
+    context[uniqFieldName](...[...args, ...bindArgs]);
     delete context[uniqFieldName];
   };
 };
