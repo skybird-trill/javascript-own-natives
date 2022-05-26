@@ -6,14 +6,14 @@ function bind(func, context, ...args) {
 // use native apply
 function bind(func, context, ...args) {
   return function(...bindArgs) {
-    func.apply(context, args.concat(bindArgs));
+    func.apply(context, [...args, ...bindArgs]);
   };
 }
 
 // use native call
 function bind(func, context, ...args) {
   return function(...bindArgs) {
-    func.call(context, ...args.concat(bindArgs));
+    func.call(context, ...[...args, ...bindArgs]);
   };
 }
 
@@ -25,7 +25,7 @@ function bind(func, context, ...args) {
       ...context,
       [uniqFieldName]: func,
     };
-    boundContext[uniqFieldName](...args.concat(bindArgs));
+    boundContext[uniqFieldName](...[...args, ...bindArgs]);
   };
 }
 
@@ -34,7 +34,7 @@ function bind(func, context, ...args) {
   return function(...bindArgs) {
     const uniqFieldName = Symbol("bindFunction");
     context[uniqFieldName] = func;
-    context[uniqFieldName](...args.concat(bindArgs));
+    context[uniqFieldName](...[...args, ...bindArgs]);
     delete context[uniqFieldName];
   };
 }
